@@ -28,6 +28,7 @@ Ext.define('Notes.view.NotesList', {
             loadingText: 'Loading notes..',
             emptyText: '<div>No notes found</div>',
             onItemDisclosure: true,
+            grouped: true,
             itemTpl: '<div>{title}</div><div>{narative}</div>'
         }],
         listeners: [{

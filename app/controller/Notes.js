@@ -82,7 +82,10 @@ Ext.define('Notes.controller.Notes', {
         var status = currNote.validate();
 
         if (!status.isValid()) {
-            alert('invalid data');
+            Ext.Msg.alert('Invalid data!', 
+                    status.getByField('title')[0].getMessage(), 
+                    Ext.emptyFn
+                );
             currNote.reject();
             return;
         }
@@ -102,6 +105,16 @@ Ext.define('Notes.controller.Notes', {
 
     onDeleteNoteCommand: function() {
         console.log('controller says: onDeleteNoteCommand');
+
+
+        var noteEditorView = this.getNoteEditorView();
+        var currNote = noteEditorView.getRecord();
+        var notesStore = Ext.getStore('Notes');
+        
+        notesStore.remove(currNote);
+        notesStore.sync();
+
+        this.activateNotesList();
     },
 
     onBackHomeCommand: function() {
