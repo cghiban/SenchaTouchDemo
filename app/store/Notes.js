@@ -1,12 +1,16 @@
 Ext.define('Notes.store.Notes', {
 	extend: 'Ext.data.Store',
+	requires: ['Ext.data.proxy.LocalStorage'],
+
 	config: {
 		model: 'Notes.model.Note',
-		data: [
-			{title: 'Title 1', narrative: 'Narrative A'},
-			{title: 'Title 2', narrative: 'Narrative B'}
-		],
-		autoLoad: true,
+
+		proxy: {
+			type: 'localstorage',
+			id: 'notes-app-store'
+		},
+		//autoLoad: true, // or use .load() from controller.launch()
+
 		sorters: [
 			{property: 'dateCreated', direction: 'DESC'}
 		]
