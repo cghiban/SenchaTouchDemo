@@ -46,6 +46,8 @@ Ext.define('Notes.view.NotesList', {
     },
     onNotesListDisclose: function(list, record, target, index, evt, options) {
         console.log('tapped on note w/ index ' + index);
-        this.fireEvent('editNoteCommand', this);
+        console.log('tapped on note w/ index ');
+        console.log(record);
+        this.fireEvent('editNoteCommand', record);
     }
 });

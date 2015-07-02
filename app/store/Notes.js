@@ -3,8 +3,8 @@ Ext.define('Notes.store.Notes', {
 	config: {
 		model: 'Notes.model.Note',
 		data: [
-			{title: 'Title 1', narative: 'Narative A'},
-			{title: 'Title 2', narative: 'Narative B'}
+			{title: 'Title 1', narrative: 'Narrative A'},
+			{title: 'Title 2', narrative: 'Narrative B'}
 		],
 		autoLoad: true,
 		sorters: [

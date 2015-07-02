@@ -6,7 +6,7 @@ Ext.define('Notes.model.Note', {
 			{name: 'id', type: 'int'},
 			{name: 'dateCreated', type: 'date', dateFormat: 'c'},
 			{name: 'title', type: 'string'},
-			{name: 'narative', type: 'string'}
+			{name: 'narrative', type: 'string'}
 		],
 		validation: [
 			{ type: 'presence', field: 'id'},

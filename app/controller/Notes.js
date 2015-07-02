@@ -18,6 +18,11 @@ Ext.define('Notes.controller.Notes', {
             notesListView: {
                 newNoteCommand: 'onNewNoteCommand',
                 editNoteCommand: 'onEditNoteCommand'
+            },
+            noteEditorView: {
+                backHomeCommand: 'onBackHomeCommand',
+                saveNoteCommand: 'onSaveNoteCommand',
+                deleteNoteCommand: 'onDeleteNoteCommand'
             }
         }
     },
@@ -53,9 +58,20 @@ Ext.define('Notes.controller.Notes', {
         this.activateNoteEditor(newNote);
     },
 
-    onEditNoteCommand: function(list, record) {
-        console.log('controller says: editNoteCommand');
+    onEditNoteCommand: function(record) {
+        this.activateNoteEditor(record);
+    },
 
+    onSaveNoteCommand: function() {
+        console.log('controller says: onSaveNoteCommand');
+    },
+
+    onDeleteNoteCommand: function() {
+        console.log('controller says: onDeleteNoteCommand');
+    },
+
+    onBackHomeCommand: function() {
+        console.log('controller says: onBackHomeCommand');
     },
 
     getRandomInt: function(min, max) {
@@ -65,9 +81,6 @@ Ext.define('Notes.controller.Notes', {
     activateNoteEditor: function(o) {
         var noteEditorView = this.getNoteEditorView();
         noteEditorView.setRecord(o);
-
-        console.log(noteEditorView);
-        console.log(this.slideLeftTransition);
 
         Ext.Viewport.animateActiveItem(noteEditorView, this.slideLeftTransition);
     }

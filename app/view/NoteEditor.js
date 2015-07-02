@@ -56,6 +56,38 @@ Ext.define('Notes.view.NoteEditor', {
                     }
                 ]
             }
-        ]
+        ],
+        listeners: [
+            {
+                delegate: "#saveButton",
+                event: 'tap',
+                fn: 'onSaveButtonTap'
+            }, {
+                delegate: "#deleteButton",
+                event: 'tap',
+                fn: 'onDeleteButtonTap'
+            }, {
+                delegate: '#backButton',
+                event: 'tap',
+                fn: 'onBackButtonTap'
+            }
+        ],
+    },
+
+    onSaveButtonTap: function() {
+        //
+        console.log('onSaveButton called');
+        this.fireEvent('saveNoteCommand', this);
+    },
+
+    onDeleteButtonTap: function() {
+        // 
+        console.log('onDeleteButton called');
+        this.fireEvent('deleteNoteCommand', this);
+    },
+
+    onBackButtonTap: function() {
+        this.fireEvent('backHomeCommand', this);
     }
+
 });
