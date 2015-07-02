@@ -11,7 +11,7 @@ Ext.define('Notes.model.Note', {
 		validation: [
 			{ type: 'presence', field: 'id'},
 			{ type: 'presence', field: 'dateCreated'},
-			{ type: 'presence', field: 'field', message: 'Title is missing..'}
+			{ type: 'presence', field: 'title', message: 'Title is missing..'}
 		]
 	}
 });

@@ -30,11 +30,18 @@ Ext.define('Notes.controller.Notes', {
             type: 'slide',
             direction: 'left'
     },
+    slideRightTransition: {
+            type: 'slide',
+            direction: 'right'
+    },
  
     // Base class methods.
     launch: function () {
         this.callParent(arguments);
         console.log('launch');
+
+        var notesStore = Ext.getStore('Notes');
+        notesStore.load();
     },
     init: function () {
         this.callParent(arguments);
@@ -64,6 +71,33 @@ Ext.define('Notes.controller.Notes', {
 
     onSaveNoteCommand: function() {
         console.log('controller says: onSaveNoteCommand');
+
+        var noteEditorView = this.getNoteEditorView();
+        var currNote = noteEditorView.getRecord();
+        var newValues = noteEditorView.getValues();
+
+        currNote.set('title', newValues.title);
+        currNote.set('narrative', newValues.narrative);
+
+        var status = currNote.validate();
+
+        if (!status.isValid()) {
+            alert('invalid data');
+            currNote.reject();
+            return;
+        }
+
+        console.log(currNote.data);
+
+        var notesStore = Ext.getStore('Notes');
+        if (! notesStore.findRecord('id', currNote.data.id)) {
+            notesStore.add(currNote);
+        }
+
+        notesStore.sync();
+        notesStore.sort({property: 'dateCreated', direction: 'DESC'});
+
+        this.activateNotesList();
     },
 
     onDeleteNoteCommand: function() {
@@ -72,6 +106,7 @@ Ext.define('Notes.controller.Notes', {
 
     onBackHomeCommand: function() {
         console.log('controller says: onBackHomeCommand');
+        this.activateNotesList();
     },
 
     getRandomInt: function(min, max) {
@@ -83,5 +118,9 @@ Ext.define('Notes.controller.Notes', {
         noteEditorView.setRecord(o);
 
         Ext.Viewport.animateActiveItem(noteEditorView, this.slideLeftTransition);
+    },
+
+    activateNotesList: function() {
+        Ext.Viewport.animateActiveItem(this.getNotesListView(), this.slideRightTransition);
     }
 });
